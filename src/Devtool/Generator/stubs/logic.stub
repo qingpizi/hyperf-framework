@@ -1,0 +1,15 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Logic\%GROUP%;
+
+use Qingpizi\HyperfFramework\Logic\BaseLogic;
+
+class %LOGIC% extends BaseLogic
+{
+    public function handle(array $validated): array
+    {
+        return [];
+    }
+}

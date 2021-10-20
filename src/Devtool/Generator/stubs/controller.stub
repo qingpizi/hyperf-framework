@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller\%GROUP%;
+
+use Qingpizi\HyperfFramework\Controller\BaseController;
+use App\Logic\%GROUP%\%LOGIC%;
+use App\Request\%GROUP%\%VALIDATION_REQUEST%;
+
+class %CONTROLLER% extends BaseController
+{
+    public function handle(%VALIDATION_REQUEST% $request)
+    {
+        $validated = $request->validated();
+        $logic = $this->container->get(%LOGIC%::class);
+        $resource = $logic->handle($validated);
+        return $this->response->success($resource);
+    }
+}
