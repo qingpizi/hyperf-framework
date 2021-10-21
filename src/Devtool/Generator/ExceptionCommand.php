@@ -20,7 +20,7 @@ class ExceptionCommand extends GeneratorCommand
 {
     public function __construct()
     {
-        parent::__construct('qpz:exception');
+        parent::__construct('easy:exception');
         $this->setDescription('Create a new exception class');
     }
 
