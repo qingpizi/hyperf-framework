@@ -13,6 +13,11 @@ class BaseLogic
      */
     protected $container;
 
+    /**
+     * 默认显示页数
+     */
+    const DEFAULT_PER_PAGE = 30;
+
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
