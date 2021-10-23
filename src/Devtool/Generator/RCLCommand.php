@@ -19,13 +19,13 @@ use Symfony\Component\Console\Output\OutputInterface;
  * @Command
  */
 #[Command]
-class EasyCommand extends GeneratorCommand
+class RCLCommand extends GeneratorCommand
 {
 
     public function __construct()
     {
-        parent::__construct('qpz:easy');
-        $this->setDescription('Create a new logic class');
+        parent::__construct('easy:rcl');
+        $this->setDescription('Create new request class and new controller class and new logic class');
     }
 
     /**
