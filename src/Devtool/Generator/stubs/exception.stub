@@ -2,11 +2,9 @@
 
 declare(strict_types=1);
 
-namespace %NAMESPACE%;
+namespace App\Exception;
 
-use App\Exception\BusinessException;
-
-class %CLASS% extends BusinessException
+class %NAME%Exception extends BusinessException
 {
 
 }

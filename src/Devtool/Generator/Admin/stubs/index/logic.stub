@@ -1,0 +1,18 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Logic\%MODEL_NAME%;
+
+use App\Constants\Code;
+use App\Exception\AdminException;
+use Qingpizi\HyperfFramework\Logic\BaseLogic;
+use App\Model\%MODEL_NAME%;
+
+class IndexLogic extends BaseLogic
+{
+    public function handle(array $validated): array
+    {
+        return [];
+    }
+}

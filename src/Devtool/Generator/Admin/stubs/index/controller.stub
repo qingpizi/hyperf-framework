@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller\%MODEL_NAME%;
+
+use Qingpizi\HyperfFramework\Controller\BaseController;
+use App\Logic\%MODEL_NAME%\IndexLogic;
+use App\Request\%MODEL_NAME%\IndexRequest;
+
+class IndexController extends BaseController
+{
+    public function handle(IndexRequest $request)
+    {
+        $validated = $request->validated();
+        $logic = $this->container->get(IndexLogic::class);
+        $data = $logic->handle($validated);
+        return $this->response->success($data);
+    }
+}

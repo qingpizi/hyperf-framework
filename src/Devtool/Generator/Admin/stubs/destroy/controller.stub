@@ -1,0 +1,18 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller\%MODEL_NAME%;
+
+use Qingpizi\HyperfFramework\Controller\BaseController;
+use App\Logic\%MODEL_NAME%\DestroyLogic;
+
+class DestroyController extends BaseController
+{
+    public function handle(int $id)
+    {
+        $logic = $this->container->get(DestroyLogic::class);
+        $data = $logic->handle($id);
+        return $this->response->success($data);
+    }
+}

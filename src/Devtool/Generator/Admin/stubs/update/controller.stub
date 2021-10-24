@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller\%MODEL_NAME%;
+
+use Qingpizi\HyperfFramework\Controller\BaseController;
+use App\Logic\%MODEL_NAME%\UpdateLogic;
+use App\Request\%MODEL_NAME%\UpdateRequest;
+
+class UpdateController extends BaseController
+{
+    public function handle(UpdateRequest $request, int $id)
+    {
+        $validated = $request->validated();
+        $logic = $this->container->get(UpdateLogic::class);
+        $data = $logic->handle($validated, $id);
+        return $this->response->success($data);
+    }
+}
