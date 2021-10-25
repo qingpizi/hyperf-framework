@@ -13,6 +13,36 @@ class IndexLogic extends BaseLogic
 {
     public function handle(array $validated): array
     {
-        return [];
+        $query = %MODEL_NAME%::query();
+        $query = $this->getWheres($query, $validated);
+        $query = $this->getOrderBys($query, $validated);
+        $paginate = $query->paginate($this->getPageSize($validated));
+        if ($paginate->isEmpty()) {
+            throw new AdminException(Code::RESOURCES_NOT_EXIST);
+        }
+        return [
+            'items' => $paginate->items(),
+            'pageInfo' => [
+                'perPage' => $paginate->perPage(),
+                'currentPage' => $paginate->currentPage(),
+                'total' => $paginate->total(),
+                'lastPage' => $paginate->lastPage(),
+            ]
+        ];
+    }
+
+    private function getWheres(Builder $query, array $validated): Builder
+    {
+        return $query;
+    }
+
+    private function getOrderBys(Builder $query, array $validated): Builder
+    {
+        return $query->orderBy('id', 'desc');
+    }
+
+    private function getPageSize(array $validated): int
+    {
+        return $validated['page_size'] ? (int) $validated['page_size'] : self::DEFAULT_PER_PAGE;
     }
 }

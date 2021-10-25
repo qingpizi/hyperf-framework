@@ -22,7 +22,16 @@ class IndexRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'page_size' => 'integer',
+            'page' => 'integer',
+        ];
+    }
 
+    public function attributes(): array
+    {
+        return [
+            'page_size' => '页数',
+            'page' => '页码',
         ];
     }
 }
