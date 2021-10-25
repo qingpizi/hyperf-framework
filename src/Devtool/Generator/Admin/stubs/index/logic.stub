@@ -43,6 +43,6 @@ class IndexLogic extends BaseLogic
 
     private function getPageSize(array $validated): int
     {
-        return $validated['page_size'] ? (int) $validated['page_size'] : self::DEFAULT_PER_PAGE;
+        return isset($validated['page_size']) ? (int) $validated['page_size'] : self::DEFAULT_PER_PAGE;
     }
 }
