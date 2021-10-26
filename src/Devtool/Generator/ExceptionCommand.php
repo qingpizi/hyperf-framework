@@ -10,13 +10,15 @@ declare(strict_types=1);
 namespace Qingpizi\HyperfFramework\Devtool\Generator;
 
 use Hyperf\Command\Annotation\Command;
-use Hyperf\Devtool\Generator\GeneratorCommand;
+use Symfony\Component\Console\Input\InputArgument;
+use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Output\OutputInterface;
 
 /**
  * @Command
  */
 #[Command]
-class ExceptionCommand extends GeneratorCommand
+class ExceptionCommand extends BaseGeneratorCommand
 {
     public function __construct()
     {
@@ -24,13 +26,22 @@ class ExceptionCommand extends GeneratorCommand
         $this->setDescription('Create a new exception class');
     }
 
-    protected function getStub(): string
+    protected function getNamespace($name)
     {
-        return __DIR__ . '/stubs/exception.stub';
+        return 'App\\Exception\\' . ucfirst($name) . 'Exception';
     }
 
-    protected function getDefaultNamespace(): string
+    protected function buildClass($name)
     {
-        return 'App\\Exception';
+        $stub = file_get_contents(__DIR__ . '/stubs/exception.stub');
+        return str_replace(
+            [
+                '%NAME%',
+            ],
+            [
+                $name,
+            ],
+            $stub
+        );
     }
 }

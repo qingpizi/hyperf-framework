@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Logic\%GROUP%;
+namespace App\Logic\%MODEL_NAME%;
 
 use Qingpizi\HyperfFramework\Logic\BaseLogic;
 
-class %LOGIC% extends BaseLogic
+class %ACTION_NAME%Logic extends BaseLogic
 {
     public function handle(array $validated): array
     {

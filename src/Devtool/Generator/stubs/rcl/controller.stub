@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller\%MODEL_NAME%;
+
+use Qingpizi\HyperfFramework\Controller\BaseController;
+use App\Logic\%MODEL_NAME%\%ACTION_NAME%Logic;
+use App\Request\%MODEL_NAME%\%ACTION_NAME%Request;
+
+class %ACTION_NAME%Controller extends BaseController
+{
+    public function handle(%ACTION_NAME%Request $request)
+    {
+        $validated = $request->validated();
+        $logic = $this->container->get(%ACTION_NAME%Logic::class);
+        $data = $logic->handle($validated);
+        return $this->response->success($data);
+    }
+}
