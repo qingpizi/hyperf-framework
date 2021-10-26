@@ -17,7 +17,7 @@ class StringHelper
      * @param string $suffix
      * @return bool
      */
-    public static function endWith(string $str, string $suffix)
+    public static function endWith(string $str, string $suffix): bool
     {
         return \substr($str, 0 - \strlen($suffix)) === $suffix;
     }
@@ -27,7 +27,7 @@ class StringHelper
      * @param string $suffix
      * @return bool
      */
-    public static function subEnd(string $str, string $suffix)
+    public static function subEnd(string $str, string $suffix): bool
     {
         return \substr($str, 0, 0 - \strlen($suffix));
     }

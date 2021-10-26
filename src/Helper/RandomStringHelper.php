@@ -7,7 +7,7 @@ namespace Qingpizi\HyperfFramework\Helper;
 
 class RandomStringHelper
 {
-    public static function randomStr($length = 6)
+    public static function randomStr($length = 6): string
     {
         $pattern = '1234567890abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ';
         $returnStr = '';
@@ -19,7 +19,7 @@ class RandomStringHelper
         return $returnStr;
     }
 
-    public static function randomNumberStr($length = 6)
+    public static function randomNumberStr($length = 6): string
     {
         $pattern = '1234567890';
         $returnStr = '';
@@ -31,7 +31,7 @@ class RandomStringHelper
         return $returnStr;
     }
 
-    public static function randomAlphaStr($length = 6)
+    public static function randomAlphaStr($length = 6): string
     {
         $pattern = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLOMNOPQRSTUVWXYZ';
         $returnStr = '';

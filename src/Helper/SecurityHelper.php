@@ -40,32 +40,32 @@ class SecurityHelper
             return false;
         }
 
-        $pkeyid = openssl_get_privatekey($private_key);
-        if (empty($pkeyid))
+        $pkeyId = openssl_get_privatekey($private_key);
+        if (empty($pkeyId))
         {
             return false;
         }
-        $result = openssl_sign($data, $signature, $pkeyid, OPENSSL_ALGO_MD5);
+        $result = openssl_sign($data, $signature, $pkeyId, OPENSSL_ALGO_MD5);
         if (!$result) {
             return false;
         }
-        openssl_free_key($pkeyid);
+        openssl_free_key($pkeyId);
         return base64_encode($signature);
     }
 
-    public static function verifyMD5WithRSA(string $public_key, $data, $signature)
+    public static function verifyMD5WithRSA(string $public_key, $data, $signature): bool
     {
         if (empty($public_key) || empty($data) || empty($signature)) {
             return false;
         }
 
-        $pkeyid = openssl_get_publickey($public_key);
-        if (empty($pkeyid))
+        $pkeyId = openssl_get_publickey($public_key);
+        if (empty($pkeyId))
         {
             return false;
         }
 
-        $ret = openssl_verify($data, base64_decode($signature), $pkeyid, OPENSSL_ALGO_MD5);
+        $ret = openssl_verify($data, base64_decode($signature), $pkeyId, OPENSSL_ALGO_MD5);
         return $ret == 1;
     }
 }

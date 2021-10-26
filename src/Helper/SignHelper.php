@@ -11,12 +11,11 @@ class SignHelper
      * @param string $key
      * @return string
      */
-    public static function makeSign(array $data, $key = '')
+    public static function makeSign(array $data, $key = ''): string
     {
         ksort($data);
         $queryString = http_build_query($data);
-        $sign = base64_encode(hash_hmac('sha256', $queryString, $key, true));
-        return $sign;
+        return base64_encode(hash_hmac('sha256', $queryString, $key, true));
     }
 
     /**
@@ -25,7 +24,7 @@ class SignHelper
      * @param string $key
      * @return bool
      */
-    public static function verifySign(string $sign, array $data, $key = '')
+    public static function verifySign(string $sign, array $data, $key = ''): bool
     {
         ksort($data);
         $queryString = http_build_query($data);
