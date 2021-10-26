@@ -13,7 +13,7 @@ class PasswordHelper
         ]);
     }
 
-    public static function verifyPassword($originPassword, $hashedPassword)
+    public static function verifyPassword($originPassword, $hashedPassword): bool
     {
         return password_verify($originPassword, $hashedPassword);
     }

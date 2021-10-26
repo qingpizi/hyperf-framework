@@ -19,10 +19,10 @@ class DateHelper
      * @return string
      * @throws \Exception
      */
-    static public function gmt_iso8601($time) {
+    static public function gmtIso8601($time) {
         $dtStr = date("c", $time);
-        $mydatetime = new DateTime($dtStr);
-        $expiration = $mydatetime->format(DateTime::ISO8601);
+        $myDateTime = new DateTime($dtStr);
+        $expiration = $myDateTime->format(DateTime::ISO8601);
         $pos = strpos($expiration, '+');
         $expiration = substr($expiration, 0, $pos);
         return $expiration."Z";
@@ -30,8 +30,11 @@ class DateHelper
 
     /**
      * 检测是否是时间戳
+     * @param $timestamp
+     * @return bool
      */
-    public static function isTimestamp($timestamp) {
+    public static function isTimestamp($timestamp): bool
+    {
         if(!is_int($timestamp)) {
             return false;
         }

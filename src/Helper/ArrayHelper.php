@@ -98,12 +98,12 @@ class ArrayHelper
         return true;
     }
 
-    public static function isArray($obj)
+    public static function isArray($obj): bool
     {
         return is_array($obj) || $obj instanceof \ArrayAccess;
     }
 
-    public static function arrayRemove(array $arr, $value)
+    public static function arrayRemove(array $arr, $value): array
     {
         $keys = array_keys($arr, $value);
         if(!empty($keys)){
