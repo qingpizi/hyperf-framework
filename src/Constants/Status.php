@@ -4,12 +4,13 @@ declare(strict_types=1);
 
 namespace Qingpizi\HyperfFramework\Constants;
 
+use Hyperf\Constants\AbstractConstants;
+
 /**
  * @Constants
- * @method string getMessage(int $code)
  */
 #[Constants]
-class Status
+class Status extends AbstractConstants
 {
     /**
      * @Message("正常")
