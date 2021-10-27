@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Qingpizi\HyperfFramework\Constants;
 
 use Hyperf\Constants\AbstractConstants;
+use Hyperf\Constants\Annotation\Constants;
 
 /**
  * @Constants

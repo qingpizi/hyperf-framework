@@ -9,6 +9,7 @@
     "description": "",
     "require": {
         "php": ">=7.4",
+        "ext-openssl": "*",
         "hyperf/amqp": "^2.2",
         "hyperf/cache": "^2.2",
         "hyperf/command": "^2.2",
@@ -27,8 +28,7 @@
         "hyperf/redis": "^2.2",
         "hyperf/signal": "^2.2",
         "hyperf/validation": "^2.2",
-        "symfony/serializer": "^5.3",
-        "ext-openssl": "*"
+        "symfony/serializer": "^5.3"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "~3.1.0",
