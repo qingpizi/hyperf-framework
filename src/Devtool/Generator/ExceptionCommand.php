@@ -1,11 +1,5 @@
 <?php
 declare(strict_types=1);
-/**
- * Created by PhpStorm
- * User: qingpizi
- * Date: 2021/10/10
- * Time: 下午11:17
- */
 
 namespace Qingpizi\HyperfFramework\Devtool\Generator;
 
