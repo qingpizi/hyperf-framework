@@ -123,7 +123,7 @@ class BaseGeneratorCommand extends Command
         return 0;
     }
 
-    public function getNamespace(){
+    protected function getNamespace(){
         return '';
     }
 }
