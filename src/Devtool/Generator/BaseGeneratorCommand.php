@@ -68,7 +68,7 @@ class BaseGeneratorCommand extends Command
      * @param string $name
      * @return bool
      */
-    protected function alreadyExists($name)
+    protected function alreadyExists($name): bool
     {
         return is_file($this->getPath($name));
     }
@@ -78,7 +78,7 @@ class BaseGeneratorCommand extends Command
      *
      * @return array
      */
-    protected function getOptions()
+    protected function getOptions(): array
     {
         return [
             ['force', 'f', InputOption::VALUE_NONE, 'Whether force to rewrite.'],
@@ -90,7 +90,7 @@ class BaseGeneratorCommand extends Command
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['name', InputArgument::REQUIRED, 'The name of the class'],
@@ -121,5 +121,9 @@ class BaseGeneratorCommand extends Command
         $output->writeln(sprintf('<info>%s</info>', $namespace . ' created successfully.'));
 
         return 0;
+    }
+
+    public function getNamespace(){
+        return '';
     }
 }

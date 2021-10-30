@@ -14,7 +14,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class BaseRCLGeneratorCommand extends BaseGeneratorCommand
 {
-    
+
 
     /**
      * Get the console command arguments.
@@ -60,7 +60,7 @@ class BaseRCLGeneratorCommand extends BaseGeneratorCommand
     }
 
 
-    protected function getNamespace($modelName, $moduleName, $actionName)
+    protected function getNamespace($modelName, $moduleName, $actionName): string
     {
         return 'App\\' .ucfirst($moduleName) . '\\' . ucfirst($modelName) . '\\' . ucfirst($actionName) . ucfirst($moduleName);
     }

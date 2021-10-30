@@ -26,7 +26,7 @@ class ExceptionCommand extends BaseGeneratorCommand
         $this->setDescription('Create a new exception class');
     }
 
-    protected function getNamespace($name)
+    protected function getNamespace($name): string
     {
         return 'App\\Exception\\' . ucfirst($name) . 'Exception';
     }
