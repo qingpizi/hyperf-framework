@@ -23,7 +23,7 @@ use Qingpizi\HyperfFramework\Devtool\Generator\BaseRCLGeneratorCommand;
 class StoreCommand extends BaseRCLGeneratorCommand
 {
 
-    protected $currentDiv = __DIR__;
+    protected string $currentDiv = __DIR__;
 
     public function __construct()
     {

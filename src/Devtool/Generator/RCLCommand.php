@@ -22,7 +22,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 class RCLCommand extends BaseRCLGeneratorCommand
 {
 
-    protected $currentDiv = __DIR__;
+    protected string $currentDiv = __DIR__;
 
     public function __construct()
     {

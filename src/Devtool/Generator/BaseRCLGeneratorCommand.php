@@ -14,15 +14,12 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 class BaseRCLGeneratorCommand extends Command
 {
-    /**
-     * @var InputInterface
-     */
-    protected $input;
 
-    /**
-     * @var OutputInterface
-     */
-    protected $output;
+    protected InputInterface $input;
+
+    protected OutputInterface $output;
+
+    protected string $currentDiv;
 
     public function configure()
     {

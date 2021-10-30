@@ -22,7 +22,7 @@ use Qingpizi\HyperfFramework\Devtool\Generator\BaseRCLGeneratorCommand;
 #[Command]
 class DestroyCommand extends BaseRCLGeneratorCommand
 {
-    protected $currentDiv = __DIR__;
+    protected string $currentDiv = __DIR__;
 
     public function __construct()
     {
