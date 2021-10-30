@@ -21,7 +21,7 @@ use Symfony\Component\Console\Output\OutputInterface;
 #[Command]
 class RCLCommand extends BaseRCLGeneratorCommand
 {
-    
+
     protected $currentDiv = __DIR__;
 
     public function __construct()
@@ -37,7 +37,7 @@ class RCLCommand extends BaseRCLGeneratorCommand
      * @param OutputInterface $output
      * @return int
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         return $this->executeHandle($input, $output, ['request', 'controller', 'logic']);
     }

@@ -12,7 +12,7 @@ use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class BaseGeneratorCommand extends Command
+abstract class BaseGeneratorCommand extends Command
 {
     /**
      * @var InputInterface
@@ -41,7 +41,7 @@ class BaseGeneratorCommand extends Command
      * @param string $name
      * @return string
      */
-    protected function getPath($name)
+    protected function getPath(string $name): string
     {
         $project = new Project();
         return BASE_PATH . '/' . $project->path($name);
@@ -53,7 +53,7 @@ class BaseGeneratorCommand extends Command
      * @param string $path
      * @return string
      */
-    protected function makeDirectory($path)
+    protected function makeDirectory(string $path): string
     {
         if (! is_dir(dirname($path))) {
             mkdir(dirname($path), 0777, true);
@@ -68,7 +68,7 @@ class BaseGeneratorCommand extends Command
      * @param string $name
      * @return bool
      */
-    protected function alreadyExists($name): bool
+    protected function alreadyExists(string $name): bool
     {
         return is_file($this->getPath($name));
     }
@@ -104,7 +104,7 @@ class BaseGeneratorCommand extends Command
      * @param OutputInterface $output
      * @return int
      */
-    protected function execute(InputInterface $input, OutputInterface $output)
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $name = ucfirst(trim($input->getArgument('name')));
 
@@ -123,7 +123,7 @@ class BaseGeneratorCommand extends Command
         return 0;
     }
 
-    protected function getNamespace(){
-        return '';
-    }
+    abstract protected function getNamespace(string $name);
+
+    abstract protected function buildClass(string $name);
 }

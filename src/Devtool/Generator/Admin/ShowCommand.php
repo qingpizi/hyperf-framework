@@ -38,7 +38,7 @@ class ShowCommand extends BaseRCLGeneratorCommand
      * @param OutputInterface $output
      * @return int
      */
-    public function execute(InputInterface $input, OutputInterface $output)
+    public function execute(InputInterface $input, OutputInterface $output): int
     {
         return $this->executeHandle($input, $output, ['controller', 'logic'], 'show');
     }

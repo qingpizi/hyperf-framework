@@ -9,12 +9,68 @@ use Hyperf\Utils\CodeGen\Project;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
-use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
-class BaseRCLGeneratorCommand extends BaseGeneratorCommand
+class BaseRCLGeneratorCommand extends Command
 {
+    /**
+     * @var InputInterface
+     */
+    protected $input;
 
+    /**
+     * @var OutputInterface
+     */
+    protected $output;
+
+    public function configure()
+    {
+        foreach ($this->getArguments() as $argument) {
+            $this->addArgument(...$argument);
+        }
+
+        foreach ($this->getOptions() as $option) {
+            $this->addOption(...$option);
+        }
+    }
+
+    /**
+     * Get the destination class path.
+     *
+     * @param string $name
+     * @return string
+     */
+    protected function getPath(string $name): string
+    {
+        $project = new Project();
+        return BASE_PATH . '/' . $project->path($name);
+    }
+
+    /**
+     * Build the directory for the class if necessary.
+     *
+     * @param string $path
+     * @return string
+     */
+    protected function makeDirectory($path)
+    {
+        if (! is_dir(dirname($path))) {
+            mkdir(dirname($path), 0777, true);
+        }
+
+        return $path;
+    }
+
+    /**
+     * Determine if the class already exists.
+     *
+     * @param string $name
+     * @return bool
+     */
+    protected function alreadyExists($name): bool
+    {
+        return is_file($this->getPath($name));
+    }
 
     /**
      * Get the console command arguments.
@@ -34,16 +90,18 @@ class BaseRCLGeneratorCommand extends BaseGeneratorCommand
      *
      * @param InputInterface $input
      * @param OutputInterface $output
+     * @param array $moduleNames
+     * @param string|null $actionName
      * @return int
      */
-    protected function executeHandle(InputInterface $input, OutputInterface $output, array $moduleNames, string $actionName = null)
+    protected function executeHandle(InputInterface $input, OutputInterface $output, array $moduleNames, string $actionName = null): int
     {
         $modelName = ucfirst(trim($input->getArgument('model_name')));
         if (is_null($actionName)) {
             $actionName = ucfirst(trim($input->getArgument('action_name')));
         }
         foreach ($moduleNames as $moduleName) {
-            $name = $this->getNamespace($modelName, $moduleName, $actionName);
+            $name = $this->getNamespace($moduleName, $modelName, $actionName);
             $path = $this->getPath($name);
             if (($input->getOption('force') === false) && $this->alreadyExists($name)) {
                 $output->writeln(sprintf('<fg=red>%s</>', $name . ' already exists!'));
@@ -59,8 +117,7 @@ class BaseRCLGeneratorCommand extends BaseGeneratorCommand
         return 0;
     }
 
-
-    protected function getNamespace($modelName, $moduleName, $actionName): string
+    protected function getNamespace($moduleName, $modelName, $actionName): string
     {
         return 'App\\' .ucfirst($moduleName) . '\\' . ucfirst($modelName) . '\\' . ucfirst($actionName) . ucfirst($moduleName);
     }
