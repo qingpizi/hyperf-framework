@@ -10,7 +10,6 @@ use Hyperf\Constants\Annotation\Constants;
 /**
  * @Constants
  */
-#[Constants]
 class Status extends AbstractConstants
 {
     /**

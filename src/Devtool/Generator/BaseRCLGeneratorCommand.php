@@ -21,7 +21,7 @@ class BaseRCLGeneratorCommand extends BaseGeneratorCommand
      *
      * @return array
      */
-    protected function getArguments()
+    protected function getArguments(): array
     {
         return [
             ['model_name', InputArgument::REQUIRED, 'The model name of the group'],
