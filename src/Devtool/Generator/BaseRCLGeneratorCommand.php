@@ -9,6 +9,7 @@ use Hyperf\Utils\CodeGen\Project;
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
+use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 
 class BaseRCLGeneratorCommand extends Command
@@ -32,6 +33,30 @@ class BaseRCLGeneratorCommand extends Command
         foreach ($this->getOptions() as $option) {
             $this->addOption(...$option);
         }
+    }
+
+    /**
+     * Get the console command options.
+     *
+     * @return array
+     */
+    protected function getOptions(): array
+    {
+        return [
+            ['force', 'f', InputOption::VALUE_NONE, 'Whether force to rewrite.'],
+        ];
+    }
+
+    /**
+     * Get the console command arguments.
+     *
+     * @return array
+     */
+    protected function getArguments(): array
+    {
+        return [
+            ['name', InputArgument::REQUIRED, 'The name of the class'],
+        ];
     }
 
     /**
@@ -70,19 +95,6 @@ class BaseRCLGeneratorCommand extends Command
     protected function alreadyExists($name): bool
     {
         return is_file($this->getPath($name));
-    }
-
-    /**
-     * Get the console command arguments.
-     *
-     * @return array
-     */
-    protected function getArguments(): array
-    {
-        return [
-            ['model_name', InputArgument::REQUIRED, 'The model name of the group'],
-            ['action_name', InputArgument::OPTIONAL, 'The action name of the class'],
-        ];
     }
 
     /**
