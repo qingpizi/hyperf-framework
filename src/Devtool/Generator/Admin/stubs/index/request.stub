@@ -24,6 +24,8 @@ class IndexRequest extends FormRequest
         return [
             'page_size' => 'integer',
             'page' => 'integer',
+            'sort_name' => 'string',
+            'sort_value' => 'string',
         ];
     }
 
@@ -32,6 +34,8 @@ class IndexRequest extends FormRequest
         return [
             'page_size' => '页数',
             'page' => '页码',
+            'sort_name' => '排序字段',
+            'sort_value' => '排序方式',
         ];
     }
 }

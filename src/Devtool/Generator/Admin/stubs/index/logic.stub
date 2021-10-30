@@ -15,8 +15,7 @@ class IndexLogic extends BaseLogic
     {
         $query = %MODEL_NAME%::query();
         $query = $this->getWheres($query, $validated);
-        $query = $this->getOrderBys($query, $validated);
-        $paginate = $query->paginate($this->getPageSize($validated));
+        $paginate = $this->getOrderBys($query, $validated)->paginate($this->getPageSize($validated));
         if ($paginate->isEmpty()) {
             throw new AdminException(Code::RESOURCES_NOT_EXIST);
         }
@@ -38,7 +37,11 @@ class IndexLogic extends BaseLogic
 
     private function getOrderBys(Builder $query, array $validated): Builder
     {
-        return $query->orderBy('id', 'desc');
+        if (! isset($validated['sort_name']) || empty($validated['sort_name'])) {
+            $validated['sort_name'] = $this->primaryKey;
+        }
+        $validated['sort_value'] = isset($validated['sort_value']) ? ($validated['sort_value'] == 'asc' ? 'asc' : 'desc') : 'desc';
+        return $query->orderBy($validated['sort_name'], $validated['sort_value']);
     }
 
     private function getPageSize(array $validated): int
