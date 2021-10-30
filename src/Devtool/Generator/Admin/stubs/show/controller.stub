@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\%MODEL_NAME%;
+namespace App\Controller\%GROUP_NAME%;
 
 use Qingpizi\HyperfFramework\Controller\BaseController;
-use App\Logic\%MODEL_NAME%\ShowLogic;
+use App\Logic\%GROUP_NAME%\ShowLogic;
 
 class ShowController extends BaseController
 {

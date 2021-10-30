@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Logic\%MODEL_NAME%;
+namespace App\Logic\%GROUP_NAME%;
 
 use App\Constants\Code;
 use App\Exception\AdminException;
 use Qingpizi\HyperfFramework\Logic\BaseLogic;
-use App\Model\%MODEL_NAME%;
+use App\Model\%GROUP_NAME%;
 
 class DestroyLogic extends BaseLogic
 {
     public function handle(int $id): array
     {
-        if (! %MODEL_NAME%::destroy($id)) {
+        if (! %GROUP_NAME%::destroy($id)) {
             throw new AdminException(Code::DELETION_FAILED);
         }
         return [];

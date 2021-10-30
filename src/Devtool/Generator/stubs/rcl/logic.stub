@@ -6,7 +6,7 @@ namespace App\Logic\%MODEL_NAME%;
 
 use Qingpizi\HyperfFramework\Logic\BaseLogic;
 
-class %ACTION_NAME%Logic extends BaseLogic
+class %BEHAVIOR_NAME%Logic extends BaseLogic
 {
     public function handle(array $validated): array
     {

@@ -2,18 +2,18 @@
 
 declare(strict_types=1);
 
-namespace App\Logic\%MODEL_NAME%;
+namespace App\Logic\%GROUP_NAME%;
 
 use App\Constants\Code;
 use App\Exception\AdminException;
 use Qingpizi\HyperfFramework\Logic\BaseLogic;
-use App\Model\%MODEL_NAME%;
+use App\Model\%GROUP_NAME%;
 
 class StoreLogic extends BaseLogic
 {
     public function handle(array $validated): array
     {
-        if(! %MODEL_NAME%::create($validated)) {
+        if(! %GROUP_NAME%::create($validated)) {
             throw new AdminException(Code::CREATION_FAILED);
         }
         return [];

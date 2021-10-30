@@ -37,28 +37,28 @@ class AdminCommand extends BaseRCLGeneratorCommand
     {
         $rcls = [
             [
-                'action_name' => 'index',
+                'behavior_name' => 'index',
                 'module_names' => ['request', 'controller', 'logic']
             ],
             [
-                'action_name' => 'show',
+                'behavior_name' => 'show',
                 'module_names' => ['controller', 'logic']
             ],
             [
-                'action_name' => 'store',
+                'behavior_name' => 'store',
                 'module_names' => ['request', 'controller', 'logic']
             ],
             [
-                'action_name' => 'update',
+                'behavior_name' => 'update',
                 'module_names' => ['request', 'controller', 'logic']
             ],
             [
-                'action_name' => 'destroy',
+                'behavior_name' => 'destroy',
                 'module_names' => ['controller', 'logic']
             ],
         ];
         foreach ($rcls as $rcl) {
-            $this->executeHandle($input, $output, $rcl['module_names'], $rcl['action_name']);
+            $this->executeHandle($input, $output, $rcl['module_names'], $rcl['behavior_name']);
         }
         return 0;
     }

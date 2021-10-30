@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace App\Controller\%MODEL_NAME%;
+namespace App\Controller\%GROUP_NAME%;
 
 use Qingpizi\HyperfFramework\Controller\BaseController;
-use App\Logic\%MODEL_NAME%\UpdateLogic;
-use App\Request\%MODEL_NAME%\UpdateRequest;
+use App\Logic\%GROUP_NAME%\UpdateLogic;
+use App\Request\%GROUP_NAME%\UpdateRequest;
 
 class UpdateController extends BaseController
 {

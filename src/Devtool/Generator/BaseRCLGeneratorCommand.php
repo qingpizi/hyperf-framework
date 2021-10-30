@@ -52,7 +52,7 @@ class BaseRCLGeneratorCommand extends Command
     protected function getArguments(): array
     {
         return [
-            ['name', InputArgument::REQUIRED, 'The name of the class'],
+            ['group_name', InputArgument::REQUIRED, 'The group name of the class'],
         ];
     }
 
@@ -103,14 +103,14 @@ class BaseRCLGeneratorCommand extends Command
      * @param string|null $actionName
      * @return int
      */
-    protected function executeHandle(InputInterface $input, OutputInterface $output, array $moduleNames, string $actionName = null): int
+    protected function executeHandle(InputInterface $input, OutputInterface $output, array $moduleNames, string $behaviorName = null): int
     {
-        $modelName = ucfirst(trim($input->getArgument('model_name')));
-        if (is_null($actionName)) {
-            $actionName = ucfirst(trim($input->getArgument('action_name')));
+        $groupName = ucfirst(trim($input->getArgument('group_name')));
+        if (is_null($behaviorName)) {
+            $behaviorName = ucfirst(trim($input->getArgument('behavior_name')));
         }
         foreach ($moduleNames as $moduleName) {
-            $name = $this->getNamespace($moduleName, $modelName, $actionName);
+            $name = $this->getNamespace($moduleName, $groupName, $behaviorName);
             $path = $this->getPath($name);
             if (($input->getOption('force') === false) && $this->alreadyExists($name)) {
                 $output->writeln(sprintf('<fg=red>%s</>', $name . ' already exists!'));
@@ -118,7 +118,7 @@ class BaseRCLGeneratorCommand extends Command
             }
             $this->makeDirectory($path);
 
-            file_put_contents($path, $this->buildClass($modelName, $moduleName, $actionName));
+            file_put_contents($path, $this->buildClass($moduleName, $groupName, $behaviorName));
 
             $output->writeln(sprintf('<info>%s</info>', $name . ' created successfully.'));
         }
@@ -126,20 +126,20 @@ class BaseRCLGeneratorCommand extends Command
         return 0;
     }
 
-    protected function getNamespace($moduleName, $modelName, $actionName): string
+    protected function getNamespace($moduleName, $groupName, $behaviorName): string
     {
-        return 'App\\' .ucfirst($moduleName) . '\\' . ucfirst($modelName) . '\\' . ucfirst($actionName) . ucfirst($moduleName);
+        return 'App\\' .ucfirst($moduleName) . '\\' . ucfirst($groupName) . '\\' . ucfirst($behaviorName) . ucfirst($moduleName);
     }
 
-    protected function buildClass($modelName, $moduleName, $actionName)
+    protected function buildClass($moduleName, $groupName, $behaviorName)
     {
-        $stub = file_get_contents($this->currentDiv . '/stubs/'. $actionName .'/' . $moduleName . '.stub');
+        $stub = file_get_contents($this->currentDiv . '/stubs/'. $behaviorName .'/' . $moduleName . '.stub');
         return str_replace(
             [
-                '%MODEL_NAME%',
+                '%GROUP_NAME%',
             ],
             [
-                $modelName,
+                $groupName,
             ],
             $stub
         );
