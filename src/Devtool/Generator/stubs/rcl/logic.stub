@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace App\Logic\%MODEL_NAME%;
+namespace App\Logic\%GROUP_NAME%;
 
 use Qingpizi\HyperfFramework\Logic\BaseLogic;
 
