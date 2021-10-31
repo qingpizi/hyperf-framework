@@ -38,7 +38,7 @@ class IndexLogic extends BaseLogic
     private function getOrderBys(Builder $query, array $validated): Builder
     {
         if (! isset($validated['sort_name']) || empty($validated['sort_name'])) {
-            $validated['sort_name'] = $this->container->get(Role::class)->getKeyName();
+            $validated['sort_name'] = $this->container->get(%GROUP_NAME%::class)->getKeyName();
         }
         $validated['sort_value'] = isset($validated['sort_value']) ? ($validated['sort_value'] == 'asc' ? 'asc' : 'desc') : 'desc';
         return $query->orderBy($validated['sort_name'], $validated['sort_value']);
