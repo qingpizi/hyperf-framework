@@ -25,7 +25,8 @@ class ConfigProvider
                 \Qingpizi\HyperfFramework\Aspect\RedisAccessLogAspect::class
             ],
             'listeners' => [
-                \Qingpizi\HyperfFramework\Listener\DbAccessLogListener::class
+                \Qingpizi\HyperfFramework\Listener\DbAccessLogListener::class,
+                \Qingpizi\HyperfFramework\Listener\CustomValidatorFactoryListener::class,
             ],
             'middlewares' => [
                 'http' => [
