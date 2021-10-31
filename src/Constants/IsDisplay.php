@@ -11,15 +11,15 @@ use Hyperf\Constants\Annotation\Constants;
  * @Constants
  */
 #[Constants]
-class Status extends AbstractConstants
+class IsDisplay extends AbstractConstants
 {
     /**
-     * @Message("正常")
+     * @Message("隐藏")
      */
-    const ENABLE = 0;
+    const NO = 0;
 
     /**
-     * @Message("禁用")
+     * @Message("显示")
      */
-    const DISABLE = 1;
+    const YES = 1;
 }
