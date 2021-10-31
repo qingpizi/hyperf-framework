@@ -37,7 +37,7 @@ class RCLCommand extends BaseRCLGeneratorCommand
         return $this->executeHandle($input, $output, ['request', 'controller', 'logic']);
     }
 
-    protected function buildClass($modelName, $moduleName, $actionName)
+    protected function buildClass($moduleName, $modelName, $actionName)
     {
         $stub = file_get_contents($this->currentDiv . '/stubs/rcl/' . $moduleName . '.stub');
         return str_replace(
