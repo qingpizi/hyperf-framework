@@ -72,3 +72,19 @@ if (! function_exists('formatThrowable')) {
         return di()->get(FormatterInterface::class)->format($throwable);
     }
 }
+
+if (! function_exists('getClientIp')) {
+    /**
+     * 获取客户端IP
+     * @return string
+     */
+    function getClientIp(): string
+    {
+        if (request()->hasHeader('x-real-ip')) {
+            $clientIp = current(request()->getHeader('x-real-ip'));
+        } else {
+            $clientIp = request()->getServerParams()['remote_addr'] ?? '';
+        }
+        return $clientIp;
+    }
+}
