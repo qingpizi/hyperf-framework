@@ -3,8 +3,6 @@ declare(strict_types=1);
 
 namespace Qingpizi\HyperfFramework\Helper;
 
-use Firebase\JWT\JWT;
-
 use Lcobucci\JWT\Builder;
 use Lcobucci\JWT\Parser;
 use Lcobucci\JWT\Signer\Hmac\Sha256;
