@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace App\Controller\%GROUP_NAME%;
 
-use Qingpizi\HyperfFramework\Controller\BaseController;
 use App\Logic\%GROUP_NAME%\UpdateLogic;
 use App\Request\%GROUP_NAME%\UpdateRequest;
+use Qingpizi\HyperfFramework\Controller\BaseController;
 
 class UpdateController extends BaseController
 {
