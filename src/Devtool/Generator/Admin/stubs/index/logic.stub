@@ -21,11 +21,11 @@ class IndexLogic extends BaseLogic
         }
         return [
             'items' => $paginate->items(),
-            'pageInfo' => [
-                'perPage' => $paginate->perPage(),
-                'currentPage' => $paginate->currentPage(),
+            'page_info' => [
+                'per_page' => $paginate->perPage(),
+                'current_page' => $paginate->currentPage(),
                 'total' => $paginate->total(),
-                'lastPage' => $paginate->lastPage(),
+                'last_page' => $paginate->lastPage(),
             ]
         ];
     }
