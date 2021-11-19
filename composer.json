@@ -29,6 +29,7 @@
         "hyperf/redis": "^2.2",
         "hyperf/signal": "^2.2",
         "hyperf/validation": "^2.2",
+        "phper666/jwt-auth": "^3.0",
         "symfony/serializer": "^5.3"
     },
     "require-dev": {
