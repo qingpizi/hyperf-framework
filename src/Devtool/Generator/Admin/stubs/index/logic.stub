@@ -26,7 +26,7 @@ class IndexLogic extends BaseLogic
                 'current_page' => $paginate->currentPage(),
                 'total' => $paginate->total(),
                 'last_page' => $paginate->lastPage(),
-            ]
+            ],
         ];
     }
 
