@@ -1,0 +1,23 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Logic\%GROUP_NAME%;
+
+use App\Constants\Code;
+use App\Exception\AdminException;
+use App\Model\%GROUP_NAME%;
+use Qingpizi\HyperfFramework\Logic\BaseLogic;
+
+class StatusLogic extends BaseLogic
+{
+    public function handle(array $validated, int $id): array
+    {
+        $result = %GROUP_NAME%::find($id);
+        if (! $result) {
+            throw new AdminException(Code::RESOURCES_NOT_EXIST);
+        }
+        $result->update(['status' => $validated['status']]);
+        return [];
+    }
+}

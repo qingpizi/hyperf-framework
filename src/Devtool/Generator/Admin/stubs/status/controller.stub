@@ -1,0 +1,20 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Controller\%GROUP_NAME%;
+
+use App\Logic\%GROUP_NAME%\StatusLogic;
+use App\Request\%GROUP_NAME%\StatusRequest;
+use Qingpizi\HyperfFramework\Controller\BaseController;
+
+class StatusController extends BaseController
+{
+    public function handle(StatusRequest $request, int $id)
+    {
+        $validated = $request->validated();
+        $logic = $this->container->get(StatusLogic::class);
+        $data = $logic->handle($validated, $id);
+        return $this->response->success($data);
+    }
+}
