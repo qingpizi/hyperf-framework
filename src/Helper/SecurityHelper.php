@@ -7,30 +7,28 @@ namespace Qingpizi\HyperfFramework\Helper;
 class SecurityHelper
 {
 
-    const AES_128_CBC = 'AES-128-CBC';
+    const AES_256_CBC = 'AES-256-CBC';
 
-    public static function encrypt($message, $secret_key, $cipher)
+    public static function encrypt($message, $secret_key, $iv = null, $cipher = self::AES_256_CBC)
     {
-        $iv = md5(time() . uniqid(), true);
         $raw = openssl_encrypt(
             $message,
             $cipher,
             $secret_key,
             OPENSSL_RAW_DATA,
-            $iv
+            is_null($iv) ? md5(time() . uniqid(), true) : $iv,
         );
         return base64_encode($raw);
     }
 
-    public static function decrypt($message, $secret_key, $cipher)
+    public static function decrypt($message, $secret_key, $iv = null, $cipher = self::AES_256_CBC)
     {
-        $iv = md5(time() . uniqid(), true);
         return openssl_decrypt(
             base64_decode($message),
             $cipher,
             $secret_key,
             OPENSSL_RAW_DATA,
-            $iv
+            is_null($iv) ? md5(time() . uniqid(), true) : $iv,
         );
     }
 

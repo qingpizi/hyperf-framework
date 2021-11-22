@@ -13,9 +13,8 @@ class UrlSafeBase64
      * @return string
      *
      */
-    private static function urlSafeBase64Encode(string $data): string
+    public static function encode(string $data): string
     {
-        $data = base64_encode($data);
         return str_replace(['+', '/', '='], ['-', '_', ''], $data);
     }
 
@@ -27,13 +26,13 @@ class UrlSafeBase64
      * @return string
      *
      */
-    private static function urlSafeBase64Decode(string $data): string
+    public static function decode(string $data): string
     {
         $data = str_replace(['-', '_'], ['+', '/'], $data);
         $mod4 = strlen($data) % 4;
         if ($mod4) {
             $data .= substr('====', $mod4);
         }
-        return base64_decode($data);
+        return $data;
     }
 }
