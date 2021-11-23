@@ -60,15 +60,14 @@ class RequestHandledMiddleware implements MiddlewareInterface
                 // 日志
                 $debug = $request->getMethod() . ' ' . (string) $request->getUri() . PHP_EOL;
                 $debug .= $this->getRequestString($request) . PHP_EOL;
-                $debug .= PHP_EOL;
                 if (isset($response)) {
-                    $debug .= $this->getResponseString($response) . PHP_EOL;
+                    $debug .= 'RESPONSE: ' . $this->getResponseString($response) . PHP_EOL;
                 }
 
                 if (isset($exception) && $exception instanceof \Throwable) {
                     $debug .= 'EXCEPTION: ' . $exception->getMessage() . PHP_EOL;
                 }
-                $context = ['time' => $time];
+                $context = ['time' => $time, 'response_status' => $response->getStatusCode()];
                 if ($time > $config->get('logger.default.custom.request.timeout')) {
                     $logger->error($debug, $context);
                 } else {
@@ -82,20 +81,7 @@ class RequestHandledMiddleware implements MiddlewareInterface
 
     protected function getResponseString(ResponseInterface $response): string
     {
-        $result = '';
-        foreach ($response->getHeaders() as $header => $values) {
-            foreach ((array) $values as $value) {
-                $result .= $header . ': ' . $value . PHP_EOL;
-            }
-        }
-
-        $result .= 'HTTP/' . $response->getProtocolVersion() . ' ' . $response->getStatusCode() . ' ' . $response->getReasonPhraseByCode($response->getStatusCode()) . PHP_EOL;
-
-        $result .= PHP_EOL;
-
-        $result .= (string) $response->getBody();
-
-        return $result;
+        return (string) $response->getBody();
     }
 
     protected function getRequestString(ServerRequestInterface $request): string
@@ -106,8 +92,6 @@ class RequestHandledMiddleware implements MiddlewareInterface
                 $result .= $header . ': ' . $value . PHP_EOL;
             }
         }
-
-        $result .= PHP_EOL;
 
         $result .= (string) $request->getBody();
         return $result;

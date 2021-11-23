@@ -37,7 +37,7 @@ class HttpRequestAccessLogMiddleware implements MiddlewareInterface
     {
         $debug = '{method} {uri}' . PHP_EOL;
         $debug .= '{request}' . PHP_EOL;
-        $debug .= '{response}' . PHP_EOL;
+        $debug .= 'RESPONSE: ' . '{response}' . PHP_EOL;
         $debug .= 'EXCEPTION: {error}' . PHP_EOL;
 
         return $this->log(
@@ -76,9 +76,9 @@ class HttpRequestAccessLogMiddleware implements MiddlewareInterface
                             $response->getBody()->rewind();
                         }
                         if ($time > $timeout) {
-                            $logger->error($message, ['time' => $time]);
+                            $logger->error($message, ['time' => $time, 'response_status' => $response->getStatusCode()]);
                         } else {
-                            $logger->info($message, ['time' => $time]);
+                            $logger->info($message, ['time' => $time, 'response_status' => $response->getStatusCode()]);
                         }
 
                         return $response;
@@ -87,7 +87,7 @@ class HttpRequestAccessLogMiddleware implements MiddlewareInterface
                         $time = round((microtime(true) - $time) * 1000, 2);
                         $response = $reason instanceof RequestException ? $reason->getResponse() : null;
                         $message = $formatter->format($request, $response, Create::exceptionFor($reason));
-                        $logger->error($message, ['time' => $time]);
+                        $logger->error($message, ['time' => $time, 'response_status' => $response->getStatusCode()]);
                         if ($response instanceof MessageInterface) {
                             $response->getBody()->rewind();
                         }
