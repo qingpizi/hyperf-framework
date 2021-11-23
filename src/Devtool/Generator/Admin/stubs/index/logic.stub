@@ -7,6 +7,7 @@ namespace App\Logic\%GROUP_NAME%;
 use App\Constants\Code;
 use App\Exception\AdminException;
 use App\Model\%GROUP_NAME%;
+use Hyperf\Database\Model\Builder;
 use Qingpizi\HyperfFramework\Logic\BaseLogic;
 
 class IndexLogic extends BaseLogic
