@@ -39,7 +39,7 @@ class ClientFactory
 
         $config = array_replace([
             'handler' => $stack,
-            'timeout' => $config->get('http.timeout', 60),
+            'timeout' => $config->get('http.timeout', 3),
         ], $options);
 
         if (method_exists($this->container, 'make')) {
