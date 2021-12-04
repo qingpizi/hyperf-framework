@@ -13,10 +13,7 @@ namespace Qingpizi\HyperfFramework\Kernel\Guzzle;
 
 use GuzzleHttp\Client;
 use Hyperf\Contract\ConfigInterface;
-use Hyperf\Guzzle\RetryMiddleware;
 use Psr\Container\ContainerInterface;
-use Hyperf\Logger\LoggerFactory;
-use Qingpizi\HyperfFramework\Constants\Time;
 
 class ClientFactory
 {
@@ -32,14 +29,13 @@ class ClientFactory
 
     public function create(array $options = []): Client
     {
-        $config = $this->container->get(ConfigInterface::class);
 
         $factory = new HandlerStackFactory();
-        $stack = $factory->create($config);
+        $stack = $factory->create();
 
         $config = array_replace([
             'handler' => $stack,
-            'timeout' => $config->get('http.timeout', 3),
+            'timeout' => $this->container->get(ConfigInterface::class)->get('http.timeout', 3),
         ], $options);
 
         if (method_exists($this->container, 'make')) {

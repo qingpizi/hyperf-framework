@@ -35,14 +35,9 @@ class HttpRequestAccessLogMiddleware implements MiddlewareInterface
 
     public function getMiddleware(): callable
     {
-        $debug = '{method} {uri}' . PHP_EOL;
-        $debug .= '{request}' . PHP_EOL;
-        $debug .= 'RESPONSE: ' . '{response}' . PHP_EOL;
-        $debug .= 'EXCEPTION: {error}' . PHP_EOL;
-
         return $this->log(
             $this->logger->make('http'),
-            new MessageFormatter($debug),
+            new MessageFormatter(MessageFormatter::DEBUG),
             $this->timeout
         );
     }
@@ -72,13 +67,16 @@ class HttpRequestAccessLogMiddleware implements MiddlewareInterface
                     static function ($response) use ($logger, $request, $formatter, $time, $timeout): ResponseInterface {
                         $time = round((microtime(true) - $time) * 1000, 2);
                         $message = $formatter->format($request, $response);
+                        $httpStatus = 0;
                         if ($response instanceof MessageInterface) {
+                            $httpStatus = $response->getStatusCode();
                             $response->getBody()->rewind();
+
                         }
-                        if ($time > $timeout) {
-                            $logger->error($message, ['time' => $time, 'response_status' => $response->getStatusCode()]);
+                        if ($time > $timeout || $httpStatus >= 300) {
+                            $logger->error($message, ['time' => $time]);
                         } else {
-                            $logger->info($message, ['time' => $time, 'response_status' => $response->getStatusCode()]);
+                            $logger->info($message, ['time' => $time]);
                         }
 
                         return $response;
@@ -87,7 +85,7 @@ class HttpRequestAccessLogMiddleware implements MiddlewareInterface
                         $time = round((microtime(true) - $time) * 1000, 2);
                         $response = $reason instanceof RequestException ? $reason->getResponse() : null;
                         $message = $formatter->format($request, $response, Create::exceptionFor($reason));
-                        $logger->error($message, ['time' => $time, 'response_status' => $response->getStatusCode()]);
+                        $logger->error($message, ['time' => $time]);
                         if ($response instanceof MessageInterface) {
                             $response->getBody()->rewind();
                         }
