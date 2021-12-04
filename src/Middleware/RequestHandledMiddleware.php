@@ -67,7 +67,7 @@ class RequestHandledMiddleware implements MiddlewareInterface
                 if (isset($exception) && $exception instanceof \Throwable) {
                     $debug .= 'EXCEPTION: ' . $exception->getMessage() . PHP_EOL;
                 }
-                $context = ['time' => $time, 'response_status' => $response->getStatusCode()];
+                $context = ['time' => $time];
                 if ($time > $config->get('logger.default.custom.request.timeout')) {
                     $logger->error($debug, $context);
                 } else {
