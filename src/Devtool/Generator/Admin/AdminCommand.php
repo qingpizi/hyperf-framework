@@ -19,7 +19,7 @@ class AdminCommand extends BaseRCLGeneratorCommand
 
     public function __construct()
     {
-        parent::__construct('admin:rcl-all');
+        parent::__construct('admin:cl-curd');
         $this->setDescription('Create new all class');
     }
 
@@ -35,7 +35,7 @@ class AdminCommand extends BaseRCLGeneratorCommand
         $rcls = [
             [
                 'behavior_name' => 'index',
-                'module_names' => ['request', 'controller', 'logic']
+                'module_names' => ['controller', 'logic']
             ],
             [
                 'behavior_name' => 'show',
@@ -43,11 +43,11 @@ class AdminCommand extends BaseRCLGeneratorCommand
             ],
             [
                 'behavior_name' => 'store',
-                'module_names' => ['request', 'controller', 'logic']
+                'module_names' => ['controller', 'logic']
             ],
             [
                 'behavior_name' => 'update',
-                'module_names' => ['request', 'controller', 'logic']
+                'module_names' => ['controller', 'logic']
             ],
             [
                 'behavior_name' => 'destroy',

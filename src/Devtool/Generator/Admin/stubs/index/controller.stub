@@ -5,14 +5,38 @@ declare(strict_types=1);
 namespace App\Controller\%GROUP_NAME%;
 
 use App\Logic\%GROUP_NAME%\IndexLogic;
-use App\Request\%GROUP_NAME%\IndexRequest;
+use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\Validation\Contract\ValidatorFactoryInterface;
+use Hyperf\Validation\ValidationException;
 use Qingpizi\HyperfFramework\Controller\BaseController;
 
 class IndexController extends BaseController
 {
-    public function handle(IndexRequest $request)
+    public function handle(RequestInterface $request)
     {
-        $validated = $request->validated();
+        // 参数校验
+        $validator = $this->container->get(ValidatorFactoryInterface::class)->make(
+            $request->all(),
+            // 自定义属性验证规则
+            [
+                'page_size' => 'integer',
+                'page' => 'integer',
+                'sort_name' => 'string',
+                'sort_value' => 'string',
+            ],
+            // 自定义属性名称
+            [
+                'page_size' => '页数',
+                'page' => '页码',
+                'sort_name' => '排序字段',
+                'sort_value' => '排序方式',
+            ],
+        );
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
+        $validated = $validator->validated();
+
         $logic = $this->container->get(IndexLogic::class);
         $data = $logic->handle($validated);
         return $this->response->success($data);

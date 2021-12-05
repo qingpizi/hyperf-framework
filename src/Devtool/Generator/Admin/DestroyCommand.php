@@ -18,7 +18,7 @@ class DestroyCommand extends BaseRCLGeneratorCommand
 
     public function __construct()
     {
-        parent::__construct('admin:rcl-destroy');
+        parent::__construct('admin:cl-destroy');
         $this->setDescription('Create new request&controller&logic destroy class');
     }
 

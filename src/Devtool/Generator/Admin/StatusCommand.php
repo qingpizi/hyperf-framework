@@ -18,7 +18,7 @@ class StatusCommand extends BaseRCLGeneratorCommand
 
     public function __construct()
     {
-        parent::__construct('admin:rcl-status');
+        parent::__construct('admin:cl-status');
         $this->setDescription('Create new request&controller&logic status class');
     }
 
@@ -31,6 +31,6 @@ class StatusCommand extends BaseRCLGeneratorCommand
      */
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        return $this->executeHandle($input, $output, ['request', 'controller', 'logic'], 'status');
+        return $this->executeHandle($input, $output, ['controller', 'logic'], 'status');
     }
 }

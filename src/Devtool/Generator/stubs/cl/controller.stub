@@ -12,7 +12,19 @@ class %BEHAVIOR_NAME%Controller extends BaseController
 {
     public function handle(%BEHAVIOR_NAME%Request $request)
     {
-        $validated = $request->validated();
+        // 参数校验
+        $validator = $this->container->get(ValidatorFactoryInterface::class)->make(
+            $request->all(),
+            // 自定义属性验证规则
+            [],
+            // 自定义属性名称
+            [],
+        );
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
+        $validated = $validator->validated();
+
         $logic = $this->container->get(%BEHAVIOR_NAME%Logic::class);
         $data = $logic->handle($validated);
         return $this->response->success($data);

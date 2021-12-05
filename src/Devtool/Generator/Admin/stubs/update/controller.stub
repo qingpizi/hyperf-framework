@@ -5,14 +5,28 @@ declare(strict_types=1);
 namespace App\Controller\%GROUP_NAME%;
 
 use App\Logic\%GROUP_NAME%\UpdateLogic;
-use App\Request\%GROUP_NAME%\UpdateRequest;
+use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\Validation\Contract\ValidatorFactoryInterface;
+use Hyperf\Validation\ValidationException;
 use Qingpizi\HyperfFramework\Controller\BaseController;
 
 class UpdateController extends BaseController
 {
-    public function handle(UpdateRequest $request, int $id)
+    public function handle(RequestInterface $request, int $id)
     {
-        $validated = $request->validated();
+        // 参数校验
+        $validator = $this->container->get(ValidatorFactoryInterface::class)->make(
+            $request->all(),
+            // 自定义属性验证规则
+            [],
+            // 自定义属性名称
+            [],
+        );
+        if ($validator->fails()) {
+            throw new ValidationException($validator);
+        }
+        $validated = $validator->validated();
+
         $logic = $this->container->get(UpdateLogic::class);
         $data = $logic->handle($validated, $id);
         return $this->response->success($data);

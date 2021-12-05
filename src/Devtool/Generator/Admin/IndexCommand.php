@@ -19,7 +19,7 @@ class IndexCommand extends BaseRCLGeneratorCommand
 
     public function __construct()
     {
-        parent::__construct('admin:rcl-index');
+        parent::__construct('admin:cl-index');
         $this->setDescription('Create new request&controller&logic index class');
     }
 
@@ -32,7 +32,7 @@ class IndexCommand extends BaseRCLGeneratorCommand
      */
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        return $this->executeHandle($input, $output, ['request', 'controller', 'logic'], 'index');
+        return $this->executeHandle($input, $output, ['controller', 'logic'], 'index');
     }
 
 }

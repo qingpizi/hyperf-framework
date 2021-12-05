@@ -19,7 +19,7 @@ class StoreCommand extends BaseRCLGeneratorCommand
 
     public function __construct()
     {
-        parent::__construct('admin:rcl-store');
+        parent::__construct('admin:cl-store');
         $this->setDescription('Create new request&controller&logic store class');
     }
 
@@ -32,6 +32,6 @@ class StoreCommand extends BaseRCLGeneratorCommand
      */
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        return $this->executeHandle($input, $output, ['request', 'controller', 'logic'], 'store');
+        return $this->executeHandle($input, $output, ['controller', 'logic'], 'store');
     }
 }

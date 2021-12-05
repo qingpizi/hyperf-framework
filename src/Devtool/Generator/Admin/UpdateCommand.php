@@ -18,7 +18,7 @@ class UpdateCommand extends BaseRCLGeneratorCommand
 
     public function __construct()
     {
-        parent::__construct('admin:rcl-update');
+        parent::__construct('admin:cl-update');
         $this->setDescription('Create new request&controller&logic update class');
     }
 
@@ -31,6 +31,6 @@ class UpdateCommand extends BaseRCLGeneratorCommand
      */
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        return $this->executeHandle($input, $output, ['request', 'controller', 'logic'], 'update');
+        return $this->executeHandle($input, $output, ['controller', 'logic'], 'update');
     }
 }
