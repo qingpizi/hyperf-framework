@@ -22,7 +22,9 @@ class RequestHandledMiddleware implements MiddlewareInterface
     /**
      * @var ContainerInterface
      */
-    protected $container;
+    protected ContainerInterface $container;
+
+    protected array $defaultHeaderWhiteList = ['content-type', 'content-length', 'authorization', 'user_id', 'sdk_version', 'sign', 'sign_nonce', 'sign_version', 'timestamp'];
 
     public function __construct(ContainerInterface $container)
     {
@@ -38,8 +40,7 @@ class RequestHandledMiddleware implements MiddlewareInterface
         $time = microtime(true);
         try {
             $response = $handler->handle($request);
-        }
-        catch (ValidationException $exception) { // 参数验证异常
+        } catch (ValidationException $exception) { // 参数验证异常
             $body = $exception->validator->errors()->first();
             $response = $this->container->get(Response::class)->fail($exception->status, $body);
             $exception = null;
@@ -87,9 +88,12 @@ class RequestHandledMiddleware implements MiddlewareInterface
     protected function getRequestString(ServerRequestInterface $request): string
     {
         $result = '';
+        $config = $this->container->get(ConfigInterface::class);
         foreach ($request->getHeaders() as $header => $values) {
-            foreach ((array) $values as $value) {
-                $result .= $header . ': ' . $value . PHP_EOL;
+            if (in_array($header, $this->defaultHeaderWhiteList)) {
+                foreach ((array) $values as $value) {
+                    $result .= $header . ': ' . $value . PHP_EOL;
+                }
             }
         }
 
