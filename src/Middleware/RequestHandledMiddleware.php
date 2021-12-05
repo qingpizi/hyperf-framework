@@ -24,7 +24,7 @@ class RequestHandledMiddleware implements MiddlewareInterface
      */
     protected ContainerInterface $container;
 
-    protected array $defaultHeaderWhiteList = ['content-type', 'content-length', 'authorization', 'user_id', 'sdk_version', 'sign', 'sign_nonce', 'sign_version', 'timestamp'];
+    protected array $defaultHeaderWhiteList = ['authorization', 'sdk_version', 'sign', 'sign_nonce', 'sign_version', 'timestamp'];
 
     public function __construct(ContainerInterface $container)
     {
