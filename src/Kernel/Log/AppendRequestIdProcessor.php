@@ -23,7 +23,7 @@ class AppendRequestIdProcessor implements ProcessorInterface
     {
         $records['context']['request_id'] = Context::getOrSet(GlobalParam::REQUEST_ID, uniqid());
         $records['context']['coroutine_id'] = Coroutine::id();
-        $records['context']['user_id'] = Coroutine::get(GlobalParam::USER_ID, 0);
+        $records['context']['user_id'] = Context::get(GlobalParam::USER_ID, 0);
         return $records;
     }
 }
