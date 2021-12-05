@@ -88,7 +88,6 @@ class RequestHandledMiddleware implements MiddlewareInterface
     protected function getRequestString(ServerRequestInterface $request): string
     {
         $result = '';
-        $config = $this->container->get(ConfigInterface::class);
         foreach ($request->getHeaders() as $header => $values) {
             if (in_array($header, $this->defaultHeaderWhiteList)) {
                 foreach ((array) $values as $value) {
