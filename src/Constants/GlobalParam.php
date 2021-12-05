@@ -6,5 +6,6 @@ namespace Qingpizi\HyperfFramework\Constants;
 
 class GlobalParam
 {
-    CONST REQUEST_ID = 'log.request.id';
+    CONST REQUEST_ID = 'request.id';
+    CONST USER_ID = 'user.id';
 }

@@ -12,7 +12,7 @@ class Env
 
     CONST TEST = 'test';
 
-    CONST BETA = 'beta';
+    CONST PRE = 'pre';
 
     CONST PRO = 'pro';
 }
