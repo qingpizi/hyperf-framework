@@ -20,7 +20,7 @@ class ShowCommand extends BaseRCLGeneratorCommand
     public function __construct()
     {
         parent::__construct('admin:cl-show');
-        $this->setDescription('Create new request&controller&logic show class');
+        $this->setDescription('Create new controller&logic show class');
     }
 
     /**

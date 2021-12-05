@@ -19,7 +19,7 @@ class StatusCommand extends BaseRCLGeneratorCommand
     public function __construct()
     {
         parent::__construct('admin:cl-status');
-        $this->setDescription('Create new request&controller&logic status class');
+        $this->setDescription('Create new controller&logic status class');
     }
 
     /**

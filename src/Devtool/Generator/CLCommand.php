@@ -21,7 +21,7 @@ class CLCommand extends BaseRCLGeneratorCommand
     {
         parent::__construct('easy:cl');
         $this->addArgument('behavior_name', InputArgument::REQUIRED, 'The behavior name of the class');
-        $this->setDescription('Create new controller class and new logic class');
+        $this->setDescription('Create new controller&logic class');
     }
 
     /**

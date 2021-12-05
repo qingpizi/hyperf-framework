@@ -20,7 +20,7 @@ class StoreCommand extends BaseRCLGeneratorCommand
     public function __construct()
     {
         parent::__construct('admin:cl-store');
-        $this->setDescription('Create new request&controller&logic store class');
+        $this->setDescription('Create new controller&logic store class');
     }
 
     /**

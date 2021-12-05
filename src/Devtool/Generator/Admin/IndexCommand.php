@@ -20,7 +20,7 @@ class IndexCommand extends BaseRCLGeneratorCommand
     public function __construct()
     {
         parent::__construct('admin:cl-index');
-        $this->setDescription('Create new request&controller&logic index class');
+        $this->setDescription('Create new controller&logic index class');
     }
 
     /**

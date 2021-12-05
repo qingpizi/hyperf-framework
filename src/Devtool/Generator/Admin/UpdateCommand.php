@@ -19,7 +19,7 @@ class UpdateCommand extends BaseRCLGeneratorCommand
     public function __construct()
     {
         parent::__construct('admin:cl-update');
-        $this->setDescription('Create new request&controller&logic update class');
+        $this->setDescription('Create new controller&logic update class');
     }
 
     /**
