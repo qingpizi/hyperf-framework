@@ -5,7 +5,9 @@ declare(strict_types=1);
 namespace App\Controller\%GROUP_NAME%;
 
 use App\Logic\%GROUP_NAME%\%BEHAVIOR_NAME%Logic;
-use App\Request\%GROUP_NAME%\%BEHAVIOR_NAME%Request;
+use Hyperf\HttpServer\Contract\RequestInterface;
+use Hyperf\Validation\Contract\ValidatorFactoryInterface;
+use Hyperf\Validation\ValidationException;
 use Qingpizi\HyperfFramework\Controller\BaseController;
 
 class %BEHAVIOR_NAME%Controller extends BaseController
