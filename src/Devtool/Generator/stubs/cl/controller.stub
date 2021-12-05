@@ -12,7 +12,7 @@ use Qingpizi\HyperfFramework\Controller\BaseController;
 
 class %BEHAVIOR_NAME%Controller extends BaseController
 {
-    public function handle(%BEHAVIOR_NAME%Request $request)
+    public function handle(RequestInterface $request)
     {
         // 参数校验
         $validator = $this->container->get(ValidatorFactoryInterface::class)->make(
