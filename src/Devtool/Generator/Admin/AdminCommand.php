@@ -20,7 +20,7 @@ class AdminCommand extends BaseRCLGeneratorCommand
     public function __construct()
     {
         parent::__construct('admin:cl-curd');
-        $this->setDescription('Create new all class');
+        $this->setDescription('Create new curd class');
     }
 
     /**
