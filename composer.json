@@ -10,6 +10,7 @@
     "require": {
         "php": ">=7.4",
         "ext-openssl": "*",
+        "doctrine/dbal": "^3.0",
         "hyperf/amqp": "^2.2",
         "hyperf/cache": "^2.2",
         "hyperf/command": "^2.2",
