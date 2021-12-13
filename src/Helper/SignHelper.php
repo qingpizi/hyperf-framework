@@ -17,7 +17,7 @@ class SignHelper
         $data = self::filteringParams($data);
         ksort($data);
         $queryString = http_build_query($data);
-        return md5($queryString. '-' . $key);
+        return md5($queryString. '&' . $key);
     }
 
     /**
@@ -32,7 +32,7 @@ class SignHelper
         $data = self::filteringParams($data);
         ksort($data);
         $queryString = http_build_query($data);
-        $realSign = md5($queryString. '-' . $key);
+        $realSign = md5($queryString. '&' . $key);
         return strcmp($sign, $realSign) === 0;
     }
 
