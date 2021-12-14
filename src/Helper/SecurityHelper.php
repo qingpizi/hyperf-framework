@@ -9,36 +9,36 @@ class SecurityHelper
 
     const AES_256_CBC = 'AES-256-CBC';
 
-    public static function encrypt($message, $secret_key, $iv = null, $cipher = self::AES_256_CBC)
+    public static function encrypt($message, $secretKey, $iv = '', $cipher = self::AES_256_CBC)
     {
         $raw = openssl_encrypt(
             $message,
             $cipher,
-            $secret_key,
+            $secretKey,
             OPENSSL_RAW_DATA,
-            is_null($iv) ? md5(time() . uniqid(), true) : $iv,
+            $iv,
         );
         return base64_encode($raw);
     }
 
-    public static function decrypt($message, $secret_key, $iv = null, $cipher = self::AES_256_CBC)
+    public static function decrypt($message, $secretKey, $iv = '', $cipher = self::AES_256_CBC)
     {
         return openssl_decrypt(
             base64_decode($message),
             $cipher,
-            $secret_key,
+            $secretKey,
             OPENSSL_RAW_DATA,
-            is_null($iv) ? md5(time() . uniqid(), true) : $iv,
+            $iv,
         );
     }
 
-    public static function signMD5WithRSA(string $private_key, $data)
+    public static function signMD5WithRSA(string $privateKey, $data)
     {
-        if (empty($private_key) || empty($data)) {
+        if (empty($privateKey) || empty($data)) {
             return false;
         }
 
-        $pkeyId = openssl_get_privatekey($private_key);
+        $pkeyId = openssl_get_privatekey($privateKey);
         if (empty($pkeyId))
         {
             return false;
@@ -51,13 +51,13 @@ class SecurityHelper
         return base64_encode($signature);
     }
 
-    public static function verifyMD5WithRSA(string $public_key, $data, $signature): bool
+    public static function verifyMD5WithRSA(string $publicKey, $data, $signature): bool
     {
-        if (empty($public_key) || empty($data) || empty($signature)) {
+        if (empty($publicKey) || empty($data) || empty($signature)) {
             return false;
         }
 
-        $pkeyId = openssl_get_publickey($public_key);
+        $pkeyId = openssl_get_publickey($publicKey);
         if (empty($pkeyId))
         {
             return false;
