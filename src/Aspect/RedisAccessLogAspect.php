@@ -54,7 +54,7 @@ class RedisAccessLogAspect implements AroundInterface
 
             $arguments = $proceedingJoinPoint->arguments['keys'];
             $logger = $this->container->get(LoggerFactory::class)->get('redis');
-            $cmd = $arguments['name'] . ' ' . implode(' ', $arguments['arguments']);
+            $cmd = sprintf('CALL: %s %s', $arguments['name'], json_encode($arguments['arguments'], JSON_UNESCAPED_UNICODE|JSON_UNESCAPED_SLASHES));
 
             $context = [
                 'time' => $time,
