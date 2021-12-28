@@ -19,6 +19,8 @@ class %BEHAVIOR_NAME%Controller extends BaseController
             $request->all(),
             // 自定义属性验证规则
             [],
+            // 自定义错误消息
+            [],
             // 自定义属性名称
             [],
         );
