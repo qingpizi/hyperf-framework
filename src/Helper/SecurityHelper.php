@@ -18,13 +18,13 @@ class SecurityHelper
             OPENSSL_RAW_DATA,
             $iv,
         );
-        return base64_encode($raw);
+        return UrlSafeBase64::encode(base64_encode($raw));
     }
 
     public static function decrypt($message, $secretKey, $iv = '', $cipher = self::AES_256_CBC)
     {
         return openssl_decrypt(
-            base64_decode($message),
+            base64_decode(UrlSafeBase64::decode($message)),
             $cipher,
             $secretKey,
             OPENSSL_RAW_DATA,
@@ -48,7 +48,7 @@ class SecurityHelper
             return false;
         }
         openssl_free_key($pkeyId);
-        return base64_encode($signature);
+        return UrlSafeBase64::encode(base64_encode($signature));
     }
 
     public static function verifyMD5WithRSA(string $publicKey, $data, $signature): bool
@@ -63,7 +63,7 @@ class SecurityHelper
             return false;
         }
 
-        $ret = openssl_verify($data, base64_decode($signature), $pkeyId, OPENSSL_ALGO_MD5);
+        $ret = openssl_verify($data, base64_decode(UrlSafeBase64::decode($signature)), $pkeyId, OPENSSL_ALGO_MD5);
         return $ret == 1;
     }
 }
