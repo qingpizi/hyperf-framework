@@ -3,7 +3,6 @@
 
 namespace Qingpizi\HyperfFramework\Helper;
 
-
 class SignHelper
 {
     /**
@@ -16,7 +15,7 @@ class SignHelper
     {
         $data = self::filteringParams($data);
         ksort($data);
-        $queryString = http_build_query($data);
+        $queryString = http_build_query($data,'','&',PHP_QUERY_RFC3986);
         return md5($queryString. '&' . $key);
     }
 
@@ -31,7 +30,8 @@ class SignHelper
     {
         $data = self::filteringParams($data);
         ksort($data);
-        $queryString = http_build_query($data);
+        $queryString = http_build_query($data,'','&',PHP_QUERY_RFC3986);
+
         $realSign = md5($queryString. '&' . $key);
         return strcmp($sign, $realSign) === 0;
     }
