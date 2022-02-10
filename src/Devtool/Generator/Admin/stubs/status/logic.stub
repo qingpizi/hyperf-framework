@@ -17,7 +17,8 @@ class StatusLogic extends BaseLogic
         if (! $result) {
             throw new AdminException(Code::RESOURCES_NOT_EXIST);
         }
-        $result->update(['status' => $validated['status']]);
+        $result->status = $validated['status'];
+        $result->save();
         return [];
     }
 }

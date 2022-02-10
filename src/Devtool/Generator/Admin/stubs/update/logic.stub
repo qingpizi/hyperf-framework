@@ -17,7 +17,7 @@ class UpdateLogic extends BaseLogic
         if (! $result) {
             throw new AdminException(Code::RESOURCES_NOT_EXIST);
         }
-        $result->update($validated);
+        $result->fill($validated)->save();
         return [];
     }
 }
