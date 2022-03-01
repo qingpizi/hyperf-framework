@@ -61,7 +61,7 @@ class DbAccessLogListener implements ListenerInterface
             if ($event->time > $config->get('logger.default.custom.database.timeout')) {
                 $logger->error($sql, $context);
             } else {
-                $logger->info($sql, $context);
+                $logger->debug($sql, $context);
             }
         }
     }

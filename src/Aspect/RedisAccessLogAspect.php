@@ -70,7 +70,7 @@ class RedisAccessLogAspect implements AroundInterface
             if ($time > $config->get('logger.default.custom.redis.timeout')) {
                 $logger->error($cmd, $context);
             } else {
-                $logger->info($cmd, $context);
+                $logger->debug($cmd, $context);
             }
         }
         return $result;
