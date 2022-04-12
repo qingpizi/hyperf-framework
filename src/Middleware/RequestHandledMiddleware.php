@@ -70,7 +70,7 @@ class RequestHandledMiddleware implements MiddlewareInterface
                 }
                 $context = ['time' => $time];
                 if ($time > $config->get('logger.default.custom.request.timeout')) {
-                    $logger->error($debug, $context);
+                    $logger->warning($debug, $context);
                 } else {
                     $logger->info($debug, $context);
                 }

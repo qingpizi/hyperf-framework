@@ -59,7 +59,7 @@ class DbAccessLogListener implements ListenerInterface
             $logger = $this->container->get(LoggerFactory::class)->get('sql');
             $context = ['time' => $event->time, 'connection_name' => $event->connectionName];
             if ($event->time > $config->get('logger.default.custom.database.timeout')) {
-                $logger->error($sql, $context);
+                $logger->warning($sql, $context);
             } else {
                 $logger->debug($sql, $context);
             }

@@ -74,7 +74,7 @@ class HttpRequestAccessLogMiddleware implements MiddlewareInterface
 
                         }
                         if ($time > $timeout || $httpStatus >= 300) {
-                            $logger->error($message, ['time' => $time]);
+                            $logger->warning($message, ['time' => $time]);
                         } else {
                             $logger->info($message, ['time' => $time]);
                         }
