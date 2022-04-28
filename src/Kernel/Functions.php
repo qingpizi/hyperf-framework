@@ -80,10 +80,17 @@ if (! function_exists('getClientIp')) {
      */
     function getClientIp(): string
     {
-        if (request()->hasHeader('x-real-ip')) {
-            $clientIp = current(request()->getHeader('x-real-ip'));
+        $xRealIp = current(request()->getHeader('x-real-ip'));
+        if (request()->hasHeader('x-forwarded-for')) {
+            $xForwardedFor = current(request()->getHeader('x-forwarded-for'));
+            $xForwardedFors = explode(',', $xForwardedFor);
+            if (count($xForwardedFors) == 2 && $xRealIp == trim($xForwardedFors[1])) {
+                $clientIp = trim($xForwardedFors[0]);
+            } else {
+                $clientIp = $xRealIp;
+            }
         } else {
-            $clientIp = request()->getServerParams()['remote_addr'] ?? '';
+            $clientIp = $xRealIp;
         }
         return $clientIp;
     }
