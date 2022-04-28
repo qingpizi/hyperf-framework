@@ -84,7 +84,8 @@ if (! function_exists('getClientIp')) {
         if (request()->hasHeader('x-forwarded-for')) {
             $xForwardedFor = current(request()->getHeader('x-forwarded-for'));
             $xForwardedFors = explode(',', $xForwardedFor);
-            if (count($xForwardedFors) == 2 && $xRealIp == trim($xForwardedFors[1])) {
+            $count = count($xForwardedFors);
+            if ($count > 1 && $xRealIp == trim($xForwardedFors[$count - 1])) {
                 $clientIp = trim($xForwardedFors[0]);
             } else {
                 $clientIp = $xRealIp;
