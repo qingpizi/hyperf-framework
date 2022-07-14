@@ -80,7 +80,7 @@ if (! function_exists('getClientIp')) {
      */
     function getClientIp(): string
     {
-        $xRealIp = current(request()->getHeader('x-real-ip'));
+        $xRealIp = (string) current(request()->getHeader('x-real-ip'));
         if (request()->hasHeader('x-forwarded-for')) {
             $xForwardedFor = current(request()->getHeader('x-forwarded-for'));
             $xForwardedFors = explode(',', $xForwardedFor);

@@ -24,8 +24,6 @@ class RequestHandledMiddleware implements MiddlewareInterface
      */
     protected ContainerInterface $container;
 
-    protected array $defaultHeaderWhiteList = ['authorization', 'sdk-version', 'sign', 'sign-nonce', 'sign-version', 'timestamp', 'device-id', 'device-type', 'channel-name'];
-
     public function __construct(ContainerInterface $container)
     {
         $this->container = $container;
@@ -89,10 +87,8 @@ class RequestHandledMiddleware implements MiddlewareInterface
     {
         $result = '';
         foreach ($request->getHeaders() as $header => $values) {
-            if (in_array($header, $this->defaultHeaderWhiteList)) {
-                foreach ((array) $values as $value) {
-                    $result .= $header . ': ' . $value . PHP_EOL;
-                }
+            foreach ((array) $values as $value) {
+                $result .= $header . ': ' . $value . PHP_EOL;
             }
         }
 
